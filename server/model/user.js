@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     age: {type: String, default: null},
     dob: {type: String, default: null},
     area: {type: String, default: null},
-    married: {type: Boolean, default: false},
+    married: {type: String, default: false},
     password:{type: String, default: null},
 })
 

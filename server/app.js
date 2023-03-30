@@ -4,6 +4,7 @@ const cors = require("cors");
 const http = require("http");
 const path = require('path');
 const userRouter= require("./routes/user-routes");
+const voterlistRouter= require("./routes/voterlist-routes");
 require("dotenv").config();
 require("./config/database").connect();
 
@@ -12,7 +13,7 @@ app.use(express.json({ limit: "50mb" }));
 const corsOpts = {
   origin: "*",
 
-  methods: ["GET", "POST","PATCH"],
+  methods: ["GET", "POST","PATCH","DELETE"],
 
   allowedHeaders: ["Content-Type"],
 };
@@ -20,6 +21,7 @@ app.use(cors(corsOpts));
 app.use(express.static('public'));
 
 app.use("/user", userRouter) 
+app.use("/voterlist",voterlistRouter)
 
 
 if (process.env.NODE_ENV === "production") {

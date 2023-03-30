@@ -13,7 +13,7 @@ router.post("/register", async (req, res) => {
       email,
       mobile_no,
       pan_no,
-      aadhaar_no,
+      aadhar_no,
       voter_id,
       age,
       dob,
@@ -33,7 +33,7 @@ router.post("/register", async (req, res) => {
       password: encryptedPassword,
       mobile_no,
       pan_no,
-      aadhaar_no,
+      aadhar_no,
       voter_id,
       age,
       dob,
@@ -80,6 +80,18 @@ router.post("/login", async (req, res) => {
     console.log(err);
   }
 });
+router.delete("/users/:id", async (req,res)=>{
+  const userData= await User.findOneAndDelete({_id: req.params.id }) 
+  res.status(200).json({userData})
+})
+router.post("/update_user", async(req,res)=>{
+let {name, email, mobile_no, user_id} = req.body;
+let user_detail = await User.findOne({_id: Object(user_id)});
+if (user_detail){
+  await User.updateOne({_id:Object(user_id)}, {name: name,email: email,mobile_no: mobile_no})
+}
+ res.status(201).json({ success : true }) 
+})
 
 router.get("/users", async(req,res)=>{
   let query = req.query;
